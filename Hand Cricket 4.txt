@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main() {
+    int n, a, sum = 0, ch, target, toss, userCall, computerCall;
+    srand(time(NULL)); 
+    printf("Let's do a toss!\nChoose '0 for Heads' or '1 for Tails': ");
+    scanf("%d", &userCall);
+    toss = rand() % 2;  
+    if (toss == userCall) {
+        printf("\nYou won the toss!\n");
+        printf("Choose your role: '1.BOWLING' or '2.BATTING': ");
+    } else {
+        printf("\nComputer won the toss!\n");
+        computerCall = rand() % 2 + 1;  
+        if (computerCall == 1) {
+            printf("Computer chose to BOWL. You are BATTING.\n");
+            ch = 2;
+        } else {
+            printf("Computer chose to BAT. You are BOWLING.\n");
+            ch = 1;
+        }
+    }
+    if (toss == userCall) {
+        scanf("%d", &ch);
+    }
+    printf("Player1 = Computer\nPlayer2 = You\n");
+    if (ch == 1) {
+        printf("Computer : I am Batting, you are Bowling");
+        printf("\nEnter a number between 1 and 6\n");
+        while (1) {
+            n = rand() % 6 + 1;  
+            printf("\nPlayer2: ");
+            scanf("%d", &a);  
+            if (a > 6) {
+                printf("\nPlease enter a valid number (1 to 6)");
+                continue;
+            }
+            printf("Player1: %d", n);
+            
+            if (a != n) {
+                printf("\nNot out!\n");
+                sum += n;
+            } else {
+                printf("\n\n'OUT! You Got Me'");
+                printf("\nTotal score of Computer = %d", sum);
+                target = sum + 1; 
+                printf("\nTarget = %d\n", target);
+                break;
+            }
+        }
+        sum = 0;  
+        printf("\nNow, you are Batting and Computer is Bowling.\n");
+        printf("\nEnter a number between 1 and 6\n");
+        while (1) {
+            n = rand() % 6 + 1;  
+            printf("\nPlayer2: ");
+            scanf("%d", &a);  
+            if (a > 6) {
+                printf("\nPlease enter a valid number (1 to 6)");
+                continue;
+            }
+            printf("Player1: %d", n);
+            if (a != n) {
+                sum += a;
+                printf("\nScore = %d\n", sum);
+                if (sum >= target) {
+                    printf("\nCongratulations! You WIN!\n");
+                    break;
+                }
+            } else {
+                printf("\n\n'You are OUT!'");
+                printf("\nTotal score = %d", sum);
+                if (sum < target) {
+                    printf("\nComputer WINS!\n");
+                }
+                break;
+            }
+        }
+    }
+    else if (ch == 2) {
+        printf("Computer : I am Bowling, you are Batting");
+        printf("\nEnter a number between 1 and 6\n");
+        while (1) {
+            n = rand() % 6 + 1;  
+            printf("\nPlayer2: ");
+            scanf("%d", &a);  
+            if (a > 6) {
+                printf("\nPlease enter a valid number (1 to 6)");
+                continue;
+            }
+            printf("Player1: %d", n);
+            if (a != n) {
+                sum += a;
+                printf("\nNot out!\n");
+            } else {
+                printf("\n\n'You are OUT!'");
+                printf("\nTotal score = %d", sum);
+                target = sum + 1;  
+                printf("\nTarget = %d\n", target);
+                break;
+            }
+        }
+        sum = 0;
+        printf("\nNow, Computer is Batting and you are Bowling.\n");
+        printf("\nEnter a number between 1 and 6\n");
+        while (1) {
+            n = rand() % 6 + 1;  
+            printf("\nPlayer2: ");
+            scanf("%d", &a); 
+            if (a > 6) {
+                printf("\nPlease enter a valid number (1 to 6)");
+                continue;
+            }
+            printf("Player1: %d", n);
+            
+            if (a != n) {
+                sum += n;
+                printf("\nComputer's score = %d\n", sum);
+                
+                if (sum >= target) {
+                    printf("\nComputer WINS!\n");
+                    break;
+                }
+            } else {
+                printf("\n\n'OUT! You Got Me'");
+                printf("\nComputer's total score = %d", sum);
+                if (sum < target) {
+                    printf("\nCongratulations! You WIN!\n");
+                }
+                break;
+            }
+            
+        }
+    }
+    return 0;
+}
